@@ -1,0 +1,35 @@
+
+% process controlled by a proportional controller,
+% with four different values of the controller gain
+
+% Parameter values.
+tau1=10; 
+tau2=10;
+kp=5;
+kd=5;
+stepsize=1;
+Kc = 1; [t1,x,y1]=sim('closed_loop_P_controller',20);
+Kc = 1; [t2,x,y2]=sim('closed_loop_P_controller',20);
+Kc = 5; [t3,x,y3]=sim('closed_loop_P_controller',20);
+Kc = 10; [t4,x,y4]=sim('closed_loop_P_controller',20);
+
+% Ploting the simulation results in figure(2)
+h1=figure(2);
+plot(t1,y1(:,2),'--c',t1,y1(:,1),t2,y2(:,1),t3,y3(:,1),...
+    t4,y4(:,1),'LineWidth',2)
+xlabel('Time [min]','FontSize',16)
+ylabel('C(t)','FontSize',16)
+h2=legend('C_s','K_c = 1','K_c = 2','K_c = 5','K_c = 10',...
+    'Location','BestOutside');
+set(h2,'FontSize',14)
+
+%%Plotting the simulation results for u(t) 
+h3=figure(3);
+plot(t1,y1(:,2),'--c',t1,y1(:,3),t2,y2(:,3),t3,y3(:,3),...
+    t4,y4(:,3),'LineWidth',2)
+xlabel('Time [min]','FontSize',16)
+ylabel('u(t)','FontSize',16)
+h4=legend('C_s','K_c = 1','K_c = 2','K_c = 5','K_c = 10',...
+    'Location','BestOutside');
+
+set(h4,'FontSize',14)
