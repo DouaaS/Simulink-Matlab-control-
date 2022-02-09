@@ -1,0 +1,26 @@
+%%% This function will plot a bode diagram for the last process in the excercise
+
+w=logspace(-2,1,200); %% generating a vector of frequencies from 10^-2 to 10^1, 200 points
+s=i*w; %% creating a complex vector of "s"
+GN=-2.*(10.*s+1).*exp(-2.*s); %% the process numerator
+GD=(100.*s.^2 +5.*s +1); %% the process denominator
+Gp=GN./GD; %% the process
+phase=180.*unwrap(angle(Gp))./pi; %% computing the phase change
+AR=abs(Gp); %% computing the AR change
+
+figure() %% opening a new figure
+subplot(2,1,1) %% splitting the figure into 2 subplots, 2 rows 1 column, first plot
+loglog(w,AR,'-r','linewidth',2) %% the AR plot is double logarithmic
+grid %% displays a grid on the plot
+xlabel('\omega [rad/time]','fontsize',12) 
+ylabel('AR','fontsize',12)
+title('AR plot','fontsize',16)
+subplot(2,1,2) %% plotting the second subplot
+semilogx(w,phase,'-r','linewidth',2) %% the phase plot is semi logarithmic, only the x axis
+grid
+xlabel('\omega [rad/time]','fontsize',12) 
+ylabel('phase [\circ]','fontsize',12)
+title('Phase plot','fontsize',16)
+
+%%% read about the 'axis' command and improve this figure
+
